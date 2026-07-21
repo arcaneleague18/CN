@@ -1,8 +1,14 @@
 import java.util.*;
 
+/**
+ * Computes and demonstrates CRC (Cyclic Redundancy Check) codes using
+ * standard generator polynomials. Supports CRC-12, CRC-16, and CRC-CCITT.
+ */
 public class CRCComputation {
 
-    // Function to perform XOR between two binary strings
+    /**
+     * Performs XOR between two binary strings (excluding leading bit).
+     */
     static String xor(String a, String b) {
         StringBuilder result = new StringBuilder();
         for (int i = 1; i < b.length(); i++) {
@@ -11,7 +17,9 @@ public class CRCComputation {
         return result.toString();
     }
 
-    // Function to perform CRC division
+    /**
+     * Divides the dividend by the divisor using binary polynomial division for CRC.
+     */
     static String divide(String dividend, String divisor) {
         int pick = divisor.length();
         String tmp = dividend.substring(0, pick);
@@ -34,7 +42,9 @@ public class CRCComputation {
         return tmp;
     }
 
-    // Function to compute CRC code
+    /**
+     * Computes the CRC remainder for the given data and generator polynomial.
+     */
     static String computeCRC(String data, String generator) {
         int genLen = generator.length();
         String appendedData = data + "0".repeat(genLen - 1);
@@ -47,6 +57,11 @@ public class CRCComputation {
 
         System.out.print("Enter data bits (binary): ");
         String data = sc.nextLine();
+        if (!data.matches("[01]+")) {
+            System.out.println("Invalid input. Enter only binary digits (0/1).");
+            sc.close();
+            return;
+        }
 
         // Standard generator polynomials
         String crc12 = "1100000001111";    // CRC-12: x^12 + x^11 + x^3 + x^2 + x + 1
