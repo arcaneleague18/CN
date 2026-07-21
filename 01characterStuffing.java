@@ -1,21 +1,32 @@
 import java.util.*;
 
+/**
+ * Demonstrates character stuffing and unstuffing for data transmission.
+ * Uses FLAG and ESC characters for framing and escaping.
+ */
 class Main {
 
+    /**
+     * Encodes a message using character stuffing, escaping FLAG and ESC characters.
+     * @param message Message to be stuffed
+     * @param FLAG Delimiter flag character
+     * @param ESC Escape character
+     * @return Stuffed message with framing flags
+     */
     public static String stuff(String message, char FLAG, char ESC) {
         Stack<Character> stack = new Stack<>();
 
-        // Push start flag
+        // Add start flag
         stack.push(FLAG);
 
         for (char c : message.toCharArray()) {
             if (c == FLAG || c == ESC) {
-                stack.push(ESC);  // stuff escape character
+                stack.push(ESC);  // stuff escape character before special char
             }
             stack.push(c);
         }
 
-        // Push end flag
+        // Add end flag
         stack.push(FLAG);
 
         // Build encoded string from stack
@@ -27,7 +38,15 @@ class Main {
         return encoded.toString();
     }
 
+    /**
+     * Decodes a message by removing character stuffing and framing flags.
+     * @param stuffed Stuffed message with flags
+     * @param FLAG Delimiter flag character
+     * @param ESC Escape character
+     * @return Original message after unstuffing
+     */
     public static String unstuff(String stuffed, char FLAG, char ESC) {
+        if (stuffed.length() < 2) return "";
         Stack<Character> stack = new Stack<>();
 
         // Extract only the inner data (ignore FLAGs)

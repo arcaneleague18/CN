@@ -1,8 +1,16 @@
 import java.util.*;
 
+/**
+ * Demonstrates three framing methods: Character Count, Character Stuffing,
+ * and Bit Stuffing, with corresponding unframing/unstuffing routines.
+ */
 public class framing {
 
-    // 1. Character Count
+    /**
+     * Character Count Framing: Prefixes each frame with its length.
+     * @param frames Array of data frames
+     * @return Array of framed data
+     */
     static String[] characterCount(String[] frames) {
         System.out.println("\nCharacter Count Framing:");
         String[] framed = new String[frames.length];
@@ -13,6 +21,10 @@ public class framing {
         return framed;
     }
 
+    /**
+     * Unframes data using Character Count method.
+     * @param framedData Array of framed data
+     */
     static void characterCountUnstuff(String[] framedData) {
         System.out.println("\nCharacter Count Unframing:");
         for (String data : framedData) {
@@ -22,7 +34,9 @@ public class framing {
         }
     }
 
-    // 2. Character Stuffing
+    /**
+     * Character Stuffing: Escapes 'DLE' in data and adds framing start/end markers.
+     */
     static String[] characterStuffing(String[] frames) {
         System.out.println("\nCharacter Stuffing Framing:");
         String[] framed = new String[frames.length];
@@ -35,6 +49,9 @@ public class framing {
         return framed;
     }
 
+    /**
+     * Unframes Character Stuffed data.
+     */
     static void characterUnstuffing(String[] stuffedFrames) {
         System.out.println("\nCharacter Stuffing Unframing:");
         for (String frame : stuffedFrames) {
@@ -45,7 +62,9 @@ public class framing {
         }
     }
 
-    // 3. Bit Stuffing
+    /**
+     * Bit Stuffing: Inserts '0' after five consecutive '1's in the bit stream.
+     */
     static String[] bitStuffing(String[] frames) {
         System.out.println("\nBit Stuffing Framing:");
         String flag = "01111110";
@@ -73,6 +92,9 @@ public class framing {
         return framed;
     }
 
+    /**
+     * Removes bit stuffing and framing flags, recovers original text.
+     */
     static void bitUnstuffing(String[] stuffedFrames) {
         System.out.println("\nBit Unstuffing:");
         String flag = "01111110";
@@ -96,11 +118,15 @@ public class framing {
             }
 
             // Convert binary to text
-            String recovered = "";
+            StringBuilder recovered = new StringBuilder();
             for (int i = 0; i + 7 < unstuffed.length(); i += 8) {
                 String byteStr = unstuffed.substring(i, i + 8);
-                char c = (char) Integer.parseInt(byteStr, 2);
-                recovered += c;
+                try {
+                    char c = (char) Integer.parseInt(byteStr, 2);
+                    recovered.append(c);
+                } catch (NumberFormatException e) {
+                    // Ignore invalid conversions
+                }
             }
             System.out.println("Recovered Text: " + recovered);
         }
