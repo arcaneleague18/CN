@@ -3,9 +3,9 @@ import java.util.*;
 /**
  * Computes and demonstrates CRC (Cyclic Redundancy Check) codes using
  * standard generator polynomials. Supports CRC-12, CRC-16, and CRC-CCITT.
+ * Provides input validation and improved comments for clarity.
  */
 public class CRCComputation {
-
     /**
      * Performs XOR between two binary strings (excluding leading bit).
      */
@@ -16,14 +16,12 @@ public class CRCComputation {
         }
         return result.toString();
     }
-
     /**
      * Divides the dividend by the divisor using binary polynomial division for CRC.
      */
     static String divide(String dividend, String divisor) {
         int pick = divisor.length();
         String tmp = dividend.substring(0, pick);
-
         while (pick < dividend.length()) {
             if (tmp.charAt(0) == '1') {
                 tmp = xor(divisor, tmp) + dividend.charAt(pick);
@@ -32,16 +30,13 @@ public class CRCComputation {
             }
             pick++;
         }
-
         // For the last bits
         if (tmp.charAt(0) == '1')
             tmp = xor(divisor, tmp);
         else
             tmp = xor("0".repeat(pick), tmp);
-
         return tmp;
     }
-
     /**
      * Computes the CRC remainder for the given data and generator polynomial.
      */
@@ -51,10 +46,8 @@ public class CRCComputation {
         String remainder = divide(appendedData, generator);
         return remainder;
     }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         System.out.print("Enter data bits (binary): ");
         String data = sc.nextLine();
         if (!data.matches("[01]+")) {
@@ -62,28 +55,23 @@ public class CRCComputation {
             sc.close();
             return;
         }
-
         // Standard generator polynomials
         String crc12 = "1100000001111";    // CRC-12: x^12 + x^11 + x^3 + x^2 + x + 1
         String crc16 = "11000000000000101"; // CRC-16: x^16 + x^15 + x^2 + 1
         String crcCCITT = "10001000000100001"; // CRC-CCITT: x^16 + x^12 + x^5 + 1
-
         // Compute CRCs
         String rem12 = computeCRC(data, crc12);
         String rem16 = computeCRC(data, crc16);
         String remCCITT = computeCRC(data, crcCCITT);
-
         // Display results
         System.out.println("\n--- CRC Results ---");
         System.out.println("CRC-12    Remainder: " + rem12);
         System.out.println("CRC-16    Remainder: " + rem16);
         System.out.println("CRC-CCITT Remainder: " + remCCITT);
-
         System.out.println("\nTransmitted Frames:");
         System.out.println("CRC-12    Frame: " + data + rem12);
         System.out.println("CRC-16    Frame: " + data + rem16);
         System.out.println("CRC-CCITT Frame: " + data + remCCITT);
-
         sc.close();
     }
 }

@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 /**
  * Alternative CRC computation implementation supporting arbitrary generator input.
+ * Includes input validation and safe resource handling.
  */
 public class crc_and_othermeth {
-
     /**
      * Performs XOR between two binary strings (excluding leading bit).
      */
@@ -14,14 +14,12 @@ public class crc_and_othermeth {
             result.append(a.charAt(i) == b.charAt(i) ? '0' : '1');
         return result.toString();
     }
-
     /**
      * Performs binary polynomial division for CRC.
      */
     static String divide(String dividend, String divisor) {
         int pick = divisor.length();
         String tmp = dividend.substring(0, pick);
-
         while (pick < dividend.length()) {
             if (tmp.charAt(0) == '1')
                 tmp = xor(divisor, tmp) + dividend.charAt(pick);
@@ -29,16 +27,13 @@ public class crc_and_othermeth {
                 tmp = xor("0".repeat(pick), tmp) + dividend.charAt(pick);
             pick += 1;
         }
-
         // Last XOR
         if (tmp.charAt(0) == '1')
             tmp = xor(divisor, tmp);
         else
             tmp = xor("0".repeat(pick), tmp);
-
         return tmp;
     }
-
     /**
      * Prints CRC value and codeword for given data and generator.
      */
@@ -47,13 +42,11 @@ public class crc_and_othermeth {
         String appendedData = data + "0".repeat(genLen - 1);
         String remainder = divide(appendedData, generator);
         String codeword = data + remainder;
-
         System.out.println("Data: " + data);
         System.out.println("Generator: " + generator);
         System.out.println("CRC: " + remainder);
         System.out.println("Codeword: " + codeword + "\n");
     }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter String:");

@@ -3,9 +3,9 @@ import java.util.*;
 /**
  * Demonstrates three framing methods: Character Count, Character Stuffing,
  * and Bit Stuffing, with corresponding unframing/unstuffing routines.
+ * Includes input validation and improved comments for maintainability.
  */
 public class framing {
-
     /**
      * Character Count Framing: Prefixes each frame with its length.
      * @param frames Array of data frames
@@ -20,7 +20,6 @@ public class framing {
         }
         return framed;
     }
-
     /**
      * Unframes data using Character Count method.
      * @param framedData Array of framed data
@@ -29,11 +28,14 @@ public class framing {
         System.out.println("\nCharacter Count Unframing:");
         for (String data : framedData) {
             int len = Character.getNumericValue(data.charAt(0)) - 1;
+            if (len < 0 || len > data.length() - 1) {
+                System.out.println("Invalid frame: " + data);
+                continue;
+            }
             String unstuffed = data.substring(1, 1 + len);
             System.out.println(unstuffed);
         }
     }
-
     /**
      * Character Stuffing: Escapes 'DLE' in data and adds framing start/end markers.
      */
@@ -48,7 +50,6 @@ public class framing {
         }
         return framed;
     }
-
     /**
      * Unframes Character Stuffed data.
      */
@@ -61,7 +62,6 @@ public class framing {
             System.out.println(data);
         }
     }
-
     /**
      * Bit Stuffing: Inserts '0' after five consecutive '1's in the bit stream.
      */
@@ -73,7 +73,6 @@ public class framing {
             StringBuilder bits = new StringBuilder();
             for (char c : frames[i].toCharArray())
                 bits.append(String.format("%8s", Integer.toBinaryString(c)).replace(' ', '0'));
-
             StringBuilder stuffed = new StringBuilder();
             int count = 0;
             for (char b : bits.toString().toCharArray()) {
@@ -91,7 +90,6 @@ public class framing {
         }
         return framed;
     }
-
     /**
      * Removes bit stuffing and framing flags, recovers original text.
      */
@@ -101,7 +99,6 @@ public class framing {
         for (String frame : stuffedFrames) {
             // Remove flags
             String bits = frame.replace(flag, "");
-
             // Remove stuffed 0s
             StringBuilder unstuffed = new StringBuilder();
             int count = 0;
@@ -116,8 +113,7 @@ public class framing {
                     }
                 } else count = 0;
             }
-
-            // Convert binary to text
+            // Convert binary to text (8 bits per char)
             StringBuilder recovered = new StringBuilder();
             for (int i = 0; i + 7 < unstuffed.length(); i += 8) {
                 String byteStr = unstuffed.substring(i, i + 8);
@@ -131,29 +127,31 @@ public class framing {
             System.out.println("Recovered Text: " + recovered);
         }
     }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of frames: ");
-        int n = sc.nextInt();
+        int n;
+        try {
+            n = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid number of frames. Exiting.");
+            sc.close();
+            return;
+        }
         sc.nextLine(); // consume newline
-
         String[] data = new String[n];
         for (int i = 0; i < n; i++) {
             System.out.print("Enter frame " + (i + 1) + ": ");
             data[i] = sc.nextLine();
         }
-
         // Perform framing
         String[] cc = characterCount(data);
         String[] cs = characterStuffing(data);
         String[] bs = bitStuffing(data);
-
         // Perform unframing
         characterCountUnstuff(cc);
         characterUnstuffing(cs);
         bitUnstuffing(bs);
-
         sc.close();
     }
 }
