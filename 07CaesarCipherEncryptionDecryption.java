@@ -1,21 +1,28 @@
 import java.util.*;
 
+/**
+ * Demonstrates Caesar Cipher encryption and decryption with safe input and clear output.
+ */
 class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         System.out.print("Enter text: ");
         String text = sc.nextLine();
         System.out.print("Enter shift key: ");
-        int key = sc.nextInt();
-
+        int key;
+        try {
+            key = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid key. Exiting.");
+            sc.close();
+            return;
+        }
         String encrypted = encrypt(text, key);
         String decrypted = decrypt(encrypted, key);
-
         System.out.println("Encrypted: " + encrypted);
         System.out.println("Decrypted: " + decrypted);
+        sc.close();
     }
-
     static String encrypt(String text, int key) {
         StringBuilder result = new StringBuilder();
         for (char c : text.toCharArray()) {
@@ -27,8 +34,7 @@ class Main {
         }
         return result.toString();
     }
-
     static String decrypt(String text, int key) {
-        return encrypt(text, 26 - key); // Reverse the shift
+        return encrypt(text, 26 - (key % 26)); // Reverse the shift with modulo
     }
 }
