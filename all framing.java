@@ -5,7 +5,7 @@ import java.util.*;
  * and Bit Stuffing, with corresponding unframing/unstuffing routines.
  * Includes input validation and improved comments for maintainability.
  */
-public class framing {
+public class FramingDemo {
     /**
      * Character Count Framing: Prefixes each frame with its length.
      * @param frames Array of data frames
@@ -127,6 +127,7 @@ public class framing {
             System.out.println("Recovered Text: " + recovered);
         }
     }
+    private FramingDemo() {}
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of frames: ");

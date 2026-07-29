@@ -4,7 +4,7 @@ import java.util.*;
  * Demonstrates building a broadcast tree (BFS spanning tree) from a network adjacency matrix.
  * Includes input validation and clear output.
  */
-class Main {
+public class BroadcastTree {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // Number of devices in subnet (nodes)

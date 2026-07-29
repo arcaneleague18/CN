@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Alternative CRC computation implementation supporting arbitrary generator input.
  * Includes input validation and safe resource handling.
  */
-public class crc_and_othermeth {
+public class CRCAlt {
     /**
      * Performs XOR between two binary strings (excluding leading bit).
      */
@@ -47,6 +47,7 @@ public class crc_and_othermeth {
         System.out.println("CRC: " + remainder);
         System.out.println("Codeword: " + codeword + "\n");
     }
+    private CRCAlt() {}
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter String:");

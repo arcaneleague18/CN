@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * Demonstrates Caesar Cipher encryption and decryption with safe input and clear output.
  */
-class Main {
+public class CaesarCipher {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter text: ");
@@ -23,6 +23,9 @@ class Main {
         System.out.println("Decrypted: " + decrypted);
         sc.close();
     }
+    /**
+     * Encrypts text using Caesar Cipher.
+     */
     static String encrypt(String text, int key) {
         StringBuilder result = new StringBuilder();
         for (char c : text.toCharArray()) {
@@ -34,7 +37,11 @@ class Main {
         }
         return result.toString();
     }
+    /**
+     * Decrypts text encrypted by Caesar Cipher.
+     */
     static String decrypt(String text, int key) {
         return encrypt(text, 26 - (key % 26)); // Reverse the shift with modulo
     }
+    private CaesarCipher() {}
 }

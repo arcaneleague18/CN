@@ -4,7 +4,7 @@ import java.util.*;
  * Simulates the Leaky Bucket algorithm for rate control.
  * Handles safe integer input and reports dropped/bucketed packets.
  */
-class Main {
+public class LeakyBucket {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter bucket size: ");

@@ -4,7 +4,7 @@ import java.util.*;
  * Demonstrates Distance Vector Routing Algorithm for computing shortest paths in a network.
  * Handles user input and validates integer entries.
  */
-class Main {
+public class DistanceVectorRouting {
     static final int INF = 999;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
