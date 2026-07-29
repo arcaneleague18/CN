@@ -4,7 +4,7 @@ import java.util.*;
  * Demonstrates the Sliding Window Protocol for reliable data transmission.
  * Handles user input for total frames and window size, with safe checks.
  */
-class Main {
+public class SlidingWindowProtocol {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter total number of frames: ");
@@ -25,6 +25,7 @@ class Main {
             sc.close();
             return;
         }
+        sc.nextLine(); // consume newline
         int i = 1; // current frame index
         while (i <= frames) {
             System.out.println("\nSending frames...");

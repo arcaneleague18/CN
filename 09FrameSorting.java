@@ -4,7 +4,7 @@ import java.util.*;
  * Demonstrates sorting of frames before delivery (out-of-order reception scenario).
  * Includes safe input handling.
  */
-class Main {
+public class FrameSorting {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of frames: ");

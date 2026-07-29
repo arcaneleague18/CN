@@ -5,7 +5,7 @@ import java.util.*;
  * represented by an adjacency matrix. Handles user input and prints shortest
  * distances from a specified source vertex.
  */
-public class Main {
+public class DijkstraAlgorithm {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of vertices: ");

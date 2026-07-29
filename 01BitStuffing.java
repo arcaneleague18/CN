@@ -14,7 +14,6 @@ public class BitStuffingString {
     public static String bitStuff(String data) {
         StringBuilder stuffed = new StringBuilder();
         int count = 0;
-
         for (char bit : data.toCharArray()) {
             stuffed.append(bit);
             if (bit == '1') {
@@ -39,7 +38,6 @@ public class BitStuffingString {
     public static String bitUnstuff(String stuffed) {
         StringBuilder unstuffed = new StringBuilder();
         int count = 0;
-
         for (int i = 0; i < stuffed.length(); i++) {
             char bit = stuffed.charAt(i);
             unstuffed.append(bit);
@@ -58,6 +56,8 @@ public class BitStuffingString {
         }
         return unstuffed.toString();
     }
+
+    private BitStuffingString() {}
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

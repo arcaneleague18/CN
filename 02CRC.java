@@ -46,6 +46,7 @@ public class CRCComputation {
         String remainder = divide(appendedData, generator);
         return remainder;
     }
+    private CRCComputation() {}
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter data bits (binary): ");

@@ -4,7 +4,7 @@ import java.util.*;
  * Demonstrates character stuffing and unstuffing for data transmission.
  * Uses FLAG and ESC characters for framing and escaping.
  */
-class Main {
+public class CharacterStuffing {
 
     /**
      * Encodes a message using character stuffing, escaping FLAG and ESC characters.
@@ -15,22 +15,17 @@ class Main {
      */
     public static String stuff(String message, char FLAG, char ESC) {
         if (message == null) return String.valueOf(FLAG) + FLAG;
-        Stack<Character> stack = new Stack<>();
+        StringBuilder encoded = new StringBuilder();
         // Add start flag
-        stack.push(FLAG);
+        encoded.append(FLAG);
         for (char c : message.toCharArray()) {
             if (c == FLAG || c == ESC) {
-                stack.push(ESC);  // stuff escape character before special char
+                encoded.append(ESC); // escape special char
             }
-            stack.push(c);
-        }
-        // Add end flag
-        stack.push(FLAG);
-        // Build encoded string from stack
-        StringBuilder encoded = new StringBuilder();
-        for (char c : stack) {
             encoded.append(c);
         }
+        // Add end flag
+        encoded.append(FLAG);
         return encoded.toString();
     }
 
@@ -43,27 +38,23 @@ class Main {
      */
     public static String unstuff(String stuffed, char FLAG, char ESC) {
         if (stuffed == null || stuffed.length() < 2) return "";
-        Stack<Character> stack = new Stack<>();
-        // Extract only the inner data (ignore FLAGs)
         String innerData = stuffed.substring(1, stuffed.length() - 1);
+        StringBuilder unstuffed = new StringBuilder();
         boolean escapeNext = false;
         for (char c : innerData.toCharArray()) {
             if (escapeNext) {
-                stack.push(c);
+                unstuffed.append(c);
                 escapeNext = false;
             } else if (c == ESC) {
                 escapeNext = true;
             } else {
-                stack.push(c);
+                unstuffed.append(c);
             }
-        }
-        // Build unstuffed message from stack
-        StringBuilder unstuffed = new StringBuilder();
-        for (char c : stack) {
-            unstuffed.append(c);
         }
         return unstuffed.toString();
     }
+
+    private CharacterStuffing() {}
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
