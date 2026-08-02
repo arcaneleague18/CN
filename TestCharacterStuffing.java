@@ -6,6 +6,9 @@ import static org.junit.Assert.*;
  * Demonstrates that encoding and then decoding yields the original data.
  */
 public class TestCharacterStuffing {
+    /**
+     * Tests character stuffing and unstuffing for a variety of inputs.
+     */
     @Test
     public void testCharacterStuffingRoundTrip() {
         char FLAG = '~';
@@ -20,6 +23,9 @@ public class TestCharacterStuffing {
         }
     }
 
+    /**
+     * Tests bit stuffing and unstuffing for a variety of bit streams.
+     */
     @Test
     public void testBitStuffingRoundTrip() {
         String[] bitstreams = {
