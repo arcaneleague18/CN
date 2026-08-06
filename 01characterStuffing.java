@@ -54,6 +54,9 @@ public class CharacterStuffing {
         return unstuffed.toString();
     }
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private CharacterStuffing() {}
 
     public static void main(String[] args) {

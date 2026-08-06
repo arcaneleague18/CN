@@ -29,12 +29,35 @@ public class TestCharacterStuffing {
     @Test
     public void testBitStuffingRoundTrip() {
         String[] bitstreams = {
-            "01111110", "11111", "111110", "00000", "1010101011", "111111111111"
+            "01111110", "11111", "111110", "00000", "1010101011", "111111111111", ""
         };
         for (String data : bitstreams) {
             String stuffed = BitStuffingString.bitStuff(data);
             String unstuffed = BitStuffingString.bitUnstuff(stuffed);
             assertEquals(data, unstuffed);
         }
+    }
+
+    /**
+     * Tests character stuffing and unstuffing with only FLAG and ESC chars repeatedly.
+     */
+    @Test
+    public void testOnlySpecialCharacters() {
+        char FLAG = '~';
+        char ESC = '}';
+        String input = "~~}}~}";
+        String stuffed = CharacterStuffing.stuff(input, FLAG, ESC);
+        String unstuffed = CharacterStuffing.unstuff(stuffed, FLAG, ESC);
+        assertEquals(input, unstuffed);
+    }
+    /**
+     * Tests bit stuffing with null or empty input explicitly.
+     */
+    @Test
+    public void testBitStuffingEmptyInput() {
+        String stuffed = BitStuffingString.bitStuff("");
+        assertEquals("", stuffed);
+        String unstuffed = BitStuffingString.bitUnstuff(stuffed);
+        assertEquals("", unstuffed);
     }
 }

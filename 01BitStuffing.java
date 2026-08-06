@@ -12,6 +12,7 @@ public class BitStuffingString {
      * @return Bit-stuffed string
      */
     public static String bitStuff(String data) {
+        if (data == null || data.isEmpty()) return "";
         StringBuilder stuffed = new StringBuilder();
         int count = 0;
         for (char bit : data.toCharArray()) {
@@ -36,6 +37,7 @@ public class BitStuffingString {
      * @return Original unstuffed bit string
      */
     public static String bitUnstuff(String stuffed) {
+        if (stuffed == null || stuffed.isEmpty()) return "";
         StringBuilder unstuffed = new StringBuilder();
         int count = 0;
         for (int i = 0; i < stuffed.length(); i++) {
@@ -57,6 +59,9 @@ public class BitStuffingString {
         return unstuffed.toString();
     }
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private BitStuffingString() {}
 
     public static void main(String[] args) {
