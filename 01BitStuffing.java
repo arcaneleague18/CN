@@ -64,9 +64,12 @@ public class BitStuffingString {
      */
     private BitStuffingString() {}
 
+    /**
+     * Main method for demonstration and manual testing.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String FLAG = "01111110";
+        final String FLAG = "01111110";
         System.out.print("Enter bit stream (only 0s and 1s): ");
         String data = sc.nextLine();
         if (!data.matches("[01]+")) {

@@ -11,8 +11,8 @@ public class TestCharacterStuffing {
      */
     @Test
     public void testCharacterStuffingRoundTrip() {
-        char FLAG = '~';
-        char ESC = '}';
+        final char FLAG = '~';
+        final char ESC = '}';
         String[] messages = {
             "hello", "abc~def", "}start", "~}~", "", null
         };
@@ -43,13 +43,14 @@ public class TestCharacterStuffing {
      */
     @Test
     public void testOnlySpecialCharacters() {
-        char FLAG = '~';
-        char ESC = '}';
+        final char FLAG = '~';
+        final char ESC = '}';
         String input = "~~}}~}";
         String stuffed = CharacterStuffing.stuff(input, FLAG, ESC);
         String unstuffed = CharacterStuffing.unstuff(stuffed, FLAG, ESC);
         assertEquals(input, unstuffed);
     }
+
     /**
      * Tests bit stuffing with null or empty input explicitly.
      */

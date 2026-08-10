@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class TestFramingDemo {
     @Test
     public void testCharacterCountFraming() {
-        String[] input = {"hello", "world", "abc"};
+        final String[] input = {"hello", "world", "abc"};
         String[] framed = FramingDemo.characterCount(input);
         assertEquals("6hello", framed[0]);
         assertEquals("6world", framed[1]);
@@ -16,7 +16,7 @@ public class TestFramingDemo {
 
     @Test
     public void testCharacterCountUnframing() {
-        String[] framed = {"6hello", "6world", "4abc"};
+        final String[] framed = {"6hello", "6world", "4abc"};
         // We can't capture System.out here, but we can check substring extraction
         int len0 = Character.getNumericValue(framed[0].charAt(0)) - 1;
         String unstuffed0 = framed[0].substring(1, 1 + len0);
@@ -25,7 +25,7 @@ public class TestFramingDemo {
 
     @Test
     public void testCharacterStuffingAndUnstuffing() {
-        String[] input = {"A DLE here", "no DLE", "DLEDLE"};
+        final String[] input = {"A DLE here", "no DLE", "DLEDLE"};
         String[] stuffed = FramingDemo.characterStuffing(input);
         assertTrue(stuffed[0].startsWith("DLESTX"));
         assertTrue(stuffed[0].endsWith("DLEETX"));
@@ -38,7 +38,7 @@ public class TestFramingDemo {
 
     @Test
     public void testBitStuffingAndUnstuffing() {
-        String[] input = {"abc", "xyz"};
+        final String[] input = {"abc", "xyz"};
         String[] stuffed = FramingDemo.bitStuffing(input);
         assertTrue(stuffed[0].startsWith("01111110"));
         assertTrue(stuffed[0].endsWith("01111110"));
