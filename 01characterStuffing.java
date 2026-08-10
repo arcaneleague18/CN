@@ -59,10 +59,13 @@ public class CharacterStuffing {
      */
     private CharacterStuffing() {}
 
+    /**
+     * Main method for demonstration and manual testing.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        char FLAG = '~';
-        char ESC = '}';
+        final char FLAG = '~';
+        final char ESC = '}';
         System.out.println("Enter message:");
         String message = sc.nextLine();
         String encoded = stuff(message, FLAG, ESC);
