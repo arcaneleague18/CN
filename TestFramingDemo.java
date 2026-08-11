@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  */
 public class TestFramingDemo {
     /**
-     * Tests Character Count framing.
+     * Tests character count framing routine.
      */
     @Test
     public void testCharacterCountFraming() {
@@ -34,6 +34,7 @@ public class TestFramingDemo {
     }
 
     /**
+     * Tests character stuffing and unstuffing routines for DLE framing.
      * Tests Character Stuffing and unstuffing logic for representative cases.
      */
     @Test

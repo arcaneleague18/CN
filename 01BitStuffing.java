@@ -66,6 +66,7 @@ public class BitStuffingString {
 
     /**
      * Main method for demonstration and manual testing.
+     * @param args Command line arguments
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
