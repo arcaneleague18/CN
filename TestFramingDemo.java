@@ -2,9 +2,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for FramingDemo framing and unframing routines.
+ * Unit tests for FramingDemo framing and unframing routines:
+ * - Character Count framing/unframing
+ * - Character Stuffing/unstuffing
+ * - Bit Stuffing/unstuffing
+ * Ensures that the implemented routines correctly frame and recover the original data.
  */
 public class TestFramingDemo {
+    /**
+     * Tests Character Count framing.
+     */
     @Test
     public void testCharacterCountFraming() {
         final String[] input = {"hello", "world", "abc"};
@@ -14,6 +21,9 @@ public class TestFramingDemo {
         assertEquals("4abc", framed[2]);
     }
 
+    /**
+     * Tests Character Count unframing logic by extracting the data portion from a framed string.
+     */
     @Test
     public void testCharacterCountUnframing() {
         final String[] framed = {"6hello", "6world", "4abc"};
@@ -23,6 +33,9 @@ public class TestFramingDemo {
         assertEquals("hello", unstuffed0);
     }
 
+    /**
+     * Tests Character Stuffing and unstuffing logic for representative cases.
+     */
     @Test
     public void testCharacterStuffingAndUnstuffing() {
         final String[] input = {"A DLE here", "no DLE", "DLEDLE"};
@@ -36,6 +49,9 @@ public class TestFramingDemo {
         assertEquals("DLEDLE", data2);
     }
 
+    /**
+     * Tests Bit Stuffing and unstuffing logic, including the recovery of the original text from the bit stream.
+     */
     @Test
     public void testBitStuffingAndUnstuffing() {
         final String[] input = {"abc", "xyz"};
