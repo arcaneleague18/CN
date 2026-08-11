@@ -2,12 +2,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for character stuffing/unstuffing and bit stuffing/unstuffing routines.
- * Demonstrates that encoding and then decoding yields the original data.
+ * Unit tests for CharacterStuffing and BitStuffingString routines.
+ * Ensures that encoding (stuffing) and then decoding (unstuffing) yields the original data.
  */
 public class TestCharacterStuffing {
     /**
-     * Tests character stuffing and unstuffing for a variety of inputs.
+     * Tests character stuffing and unstuffing for a variety of inputs, including null and empty strings.
      */
     @Test
     public void testCharacterStuffingRoundTrip() {
@@ -24,7 +24,7 @@ public class TestCharacterStuffing {
     }
 
     /**
-     * Tests bit stuffing and unstuffing for a variety of bit streams.
+     * Tests bit stuffing and unstuffing for a variety of bit streams, including edge cases.
      */
     @Test
     public void testBitStuffingRoundTrip() {
@@ -39,7 +39,7 @@ public class TestCharacterStuffing {
     }
 
     /**
-     * Tests character stuffing and unstuffing with only FLAG and ESC chars repeatedly.
+     * Tests character stuffing and unstuffing where the input consists only of special characters (FLAG and ESC).
      */
     @Test
     public void testOnlySpecialCharacters() {
@@ -52,7 +52,7 @@ public class TestCharacterStuffing {
     }
 
     /**
-     * Tests bit stuffing with null or empty input explicitly.
+     * Tests bit stuffing and unstuffing explicitly for null and empty input.
      */
     @Test
     public void testBitStuffingEmptyInput() {
