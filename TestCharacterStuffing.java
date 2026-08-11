@@ -2,7 +2,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Basic tests for stuffing/unstuffing routines (character and bit).
+ * Unit tests for character stuffing/unstuffing and bit stuffing/unstuffing routines.
  * Demonstrates that encoding and then decoding yields the original data.
  */
 public class TestCharacterStuffing {

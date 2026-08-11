@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
  * Unit tests for FramingDemo framing and unframing routines.
  */
 public class TestFramingDemo {
+    /**
+     * Tests character count framing routine.
+     */
     @Test
     public void testCharacterCountFraming() {
         final String[] input = {"hello", "world", "abc"};
@@ -14,6 +17,9 @@ public class TestFramingDemo {
         assertEquals("4abc", framed[2]);
     }
 
+    /**
+     * Tests character count unframing logic (substring extraction).
+     */
     @Test
     public void testCharacterCountUnframing() {
         final String[] framed = {"6hello", "6world", "4abc"};
@@ -23,6 +29,9 @@ public class TestFramingDemo {
         assertEquals("hello", unstuffed0);
     }
 
+    /**
+     * Tests character stuffing and unstuffing routines for DLE framing.
+     */
     @Test
     public void testCharacterStuffingAndUnstuffing() {
         final String[] input = {"A DLE here", "no DLE", "DLEDLE"};
@@ -36,6 +45,9 @@ public class TestFramingDemo {
         assertEquals("DLEDLE", data2);
     }
 
+    /**
+     * Tests bit stuffing and unstuffing logic, verifying round trip recovery.
+     */
     @Test
     public void testBitStuffingAndUnstuffing() {
         final String[] input = {"abc", "xyz"};
