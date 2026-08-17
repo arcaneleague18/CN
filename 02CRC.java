@@ -8,6 +8,9 @@ import java.util.*;
 public class CRCComputation {
     /**
      * Performs XOR between two binary strings (excluding leading bit).
+     * @param a First binary string (divisor or zero string)
+     * @param b Second binary string (current remainder)
+     * @return XOR result as a binary string (length b.length() - 1)
      */
     static String xor(String a, String b) {
         StringBuilder result = new StringBuilder();
@@ -18,6 +21,9 @@ public class CRCComputation {
     }
     /**
      * Divides the dividend by the divisor using binary polynomial division for CRC.
+     * @param dividend Input data with appended zeros (binary string)
+     * @param divisor Generator polynomial (binary string)
+     * @return Remainder as a binary string
      */
     static String divide(String dividend, String divisor) {
         int pick = divisor.length();
@@ -39,6 +45,9 @@ public class CRCComputation {
     }
     /**
      * Computes the CRC remainder for the given data and generator polynomial.
+     * @param data Data bits (binary string)
+     * @param generator Generator polynomial (binary string)
+     * @return Remainder as a binary string (CRC bits)
      */
     static String computeCRC(String data, String generator) {
         int genLen = generator.length();
@@ -46,6 +55,9 @@ public class CRCComputation {
         String remainder = divide(appendedData, generator);
         return remainder;
     }
+    /**
+     * Private constructor to prevent instantiation of utility class.
+     */
     private CRCComputation() {}
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
