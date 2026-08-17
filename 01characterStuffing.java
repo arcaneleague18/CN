@@ -8,10 +8,10 @@ public class CharacterStuffing {
 
     /**
      * Encodes a message using character stuffing, escaping FLAG and ESC characters.
-     * @param message Message to be stuffed
+     * @param message Message to be stuffed (may be null)
      * @param FLAG Delimiter flag character
      * @param ESC Escape character
-     * @return Stuffed message with framing flags
+     * @return Stuffed message with framing flags (never null)
      */
     public static String stuff(String message, char FLAG, char ESC) {
         if (message == null) return String.valueOf(FLAG) + FLAG;
@@ -31,10 +31,10 @@ public class CharacterStuffing {
 
     /**
      * Decodes a message by removing character stuffing and framing flags.
-     * @param stuffed Stuffed message with flags
+     * @param stuffed Stuffed message with flags (may be null)
      * @param FLAG Delimiter flag character
      * @param ESC Escape character
-     * @return Original message after unstuffing
+     * @return Original message after unstuffing (never null)
      */
     public static String unstuff(String stuffed, char FLAG, char ESC) {
         if (stuffed == null || stuffed.length() < 2) return "";
@@ -55,13 +55,13 @@ public class CharacterStuffing {
     }
 
     /**
-     * Private constructor to prevent instantiation.
+     * Private constructor to prevent instantiation of utility class.
      */
     private CharacterStuffing() {}
 
     /**
      * Main method for demonstration and manual testing.
-     * @param args Command line arguments
+     * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

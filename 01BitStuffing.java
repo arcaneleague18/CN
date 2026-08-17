@@ -9,7 +9,7 @@ public class BitStuffingString {
     /**
      * Performs bit stuffing on a binary string (inserts '0' after five consecutive '1's).
      * @param data Bit string (only '0' and '1')
-     * @return Bit-stuffed string
+     * @return Bit-stuffed string (may be empty if data is null or empty)
      */
     public static String bitStuff(String data) {
         if (data == null || data.isEmpty()) return "";
@@ -33,8 +33,8 @@ public class BitStuffingString {
 
     /**
      * Performs bit unstuffing on a bit-stuffed string (removes '0' after five consecutive '1's).
-     * @param stuffed Bit-stuffed string
-     * @return Original unstuffed bit string
+     * @param stuffed Bit-stuffed string (only '0' and '1')
+     * @return Original unstuffed bit string (may be empty if stuffed is null or empty)
      */
     public static String bitUnstuff(String stuffed) {
         if (stuffed == null || stuffed.isEmpty()) return "";
@@ -60,13 +60,13 @@ public class BitStuffingString {
     }
 
     /**
-     * Private constructor to prevent instantiation.
+     * Private constructor to prevent instantiation of utility class.
      */
     private BitStuffingString() {}
 
     /**
      * Main method for demonstration and manual testing.
-     * @param args Command line arguments
+     * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
