@@ -3,6 +3,9 @@ import java.util.*;
 /**
  * Demonstrates character stuffing and unstuffing for data transmission.
  * Uses FLAG and ESC characters for framing and escaping.
+ *
+ * Character Stuffing: Escapes special characters in the message and adds framing flags.
+ * Character Unstuffing: Removes escaping and framing to recover original message.
  */
 public class CharacterStuffing {
 
@@ -61,6 +64,7 @@ public class CharacterStuffing {
 
     /**
      * Main method for demonstration and manual testing.
+     * Accepts a message, applies character stuffing, and decodes it.
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {

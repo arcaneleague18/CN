@@ -3,6 +3,9 @@ import java.util.*;
 /**
  * Demonstrates bit stuffing and unstuffing for HDLC-like framing schemes.
  * Provides safe input checks and closes resources properly.
+ *
+ * Bit Stuffing: Inserts a '0' after every sequence of five consecutive '1's.
+ * Bit Unstuffing: Removes a '0' following every sequence of five consecutive '1's.
  */
 public class BitStuffingString {
 
@@ -66,6 +69,7 @@ public class BitStuffingString {
 
     /**
      * Main method for demonstration and manual testing.
+     * Accepts a bit stream, validates it, applies bit stuffing, framing flags, and unstuffing.
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
