@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 /**
  * Unit tests for CharacterStuffing and BitStuffingString routines.
  * Ensures that encoding (stuffing) and then decoding (unstuffing) yields the original data.
+ *
+ * Test coverage includes:
+ * - Round-trip stuffing/unstuffing of normal, special, empty, and null strings.
+ * - Bit stuffing/un-stuffing for bit streams and edge cases.
+ * - Handling of only special characters (FLAG, ESC) in character stuffing.
  */
 public class TestCharacterStuffing {
     /**
