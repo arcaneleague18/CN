@@ -6,16 +6,24 @@ import static org.junit.Assert.*;
  * - Character Count framing/unframing
  * - Character Stuffing/unstuffing
  * - Bit Stuffing/unstuffing
+ *
  * Ensures that the implemented routines correctly frame and recover the original data.
+ *
+ * Test coverage includes:
+ * - Framing correctness (output format)
+ * - Unframing logic for extraction (manual substring tests)
+ * - Bit/character conversion and stuff/unstuff reversibility
  */
 public class TestFramingDemo {
     /**
      * Tests character count framing routine.
+     * Ensures that the output is of the correct format (length prefix + data).
      */
     @Test
     public void testCharacterCountFraming() {
         final String[] input = {"hello", "world", "abc"};
         String[] framed = FramingDemo.characterCount(input);
+        // Length includes the length prefix itself (data length + 1)
         assertEquals("6hello", framed[0]);
         assertEquals("6world", framed[1]);
         assertEquals("4abc", framed[2]);
@@ -23,11 +31,12 @@ public class TestFramingDemo {
 
     /**
      * Tests Character Count unframing logic by extracting the data portion from a framed string.
+     * This does not test console output, but checks correct substring extraction.
      */
     @Test
     public void testCharacterCountUnframing() {
         final String[] framed = {"6hello", "6world", "4abc"};
-        // We can't capture System.out here, but we can check substring extraction
+        // The first character is the length, subtract 1 for data portion
         int len0 = Character.getNumericValue(framed[0].charAt(0)) - 1;
         String unstuffed0 = framed[0].substring(1, 1 + len0);
         assertEquals("hello", unstuffed0);
@@ -35,12 +44,13 @@ public class TestFramingDemo {
 
     /**
      * Tests character stuffing and unstuffing routines for DLE framing.
-     * Tests Character Stuffing and unstuffing logic for representative cases.
+     * Ensures that the framing markers are present, and that unstuffing recovers original data.
      */
     @Test
     public void testCharacterStuffingAndUnstuffing() {
         final String[] input = {"A DLE here", "no DLE", "DLEDLE"};
         String[] stuffed = FramingDemo.characterStuffing(input);
+        // Check framing markers
         assertTrue(stuffed[0].startsWith("DLESTX"));
         assertTrue(stuffed[0].endsWith("DLEETX"));
         // Undo stuffing by string replace (simulate unstuffing logic)
@@ -52,16 +62,18 @@ public class TestFramingDemo {
 
     /**
      * Tests Bit Stuffing and unstuffing logic, including the recovery of the original text from the bit stream.
+     * This verifies both correct flag handling and bit/character conversion.
      */
     @Test
     public void testBitStuffingAndUnstuffing() {
         final String[] input = {"abc", "xyz"};
         String[] stuffed = FramingDemo.bitStuffing(input);
-        assertTrue(stuffed[0].startsWith("01111110"));
+        assertTrue(stuffed[0].startsWith("01111110")); // Standard HDLC flag
         assertTrue(stuffed[0].endsWith("01111110"));
         // Remove flag and unstuff bits, then recover original text
         String flag = "01111110";
         String bits = stuffed[0].replace(flag, "");
+        // Undo bit stuffing (remove '0' after five consecutive '1's)
         StringBuilder unstuffed = new StringBuilder();
         int count = 0;
         for (int i = 0; i < bits.length(); i++) {
@@ -70,7 +82,7 @@ public class TestFramingDemo {
             if (b == '1') {
                 count++;
                 if (count == 5 && i + 1 < bits.length() && bits.charAt(i + 1) == '0') {
-                    i++; // skip stuffed 0
+                    i++; // Skip stuffed 0
                     count = 0;
                 }
             } else {
