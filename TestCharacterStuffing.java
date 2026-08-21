@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 public class TestCharacterStuffing {
     /**
      * Tests character stuffing and unstuffing for a variety of inputs, including null and empty strings.
+     * Checks that round-trip yields the original message.
      */
     @Test
     public void testCharacterStuffingRoundTrip() {
@@ -24,12 +25,14 @@ public class TestCharacterStuffing {
         for (String msg : messages) {
             String stuffed = CharacterStuffing.stuff(msg, FLAG, ESC);
             String unstuffed = CharacterStuffing.unstuff(stuffed, FLAG, ESC);
+            // For null input, unstuffed message should be empty string
             assertEquals(msg == null ? "" : msg, unstuffed);
         }
     }
 
     /**
      * Tests bit stuffing and unstuffing for a variety of bit streams, including edge cases.
+     * Ensures bitUnstuff(bitStuff(x)) == x.
      */
     @Test
     public void testBitStuffingRoundTrip() {
@@ -45,6 +48,7 @@ public class TestCharacterStuffing {
 
     /**
      * Tests character stuffing and unstuffing where the input consists only of special characters (FLAG and ESC).
+     * Ensures that all special chars are correctly escaped and recovered.
      */
     @Test
     public void testOnlySpecialCharacters() {
@@ -58,6 +62,7 @@ public class TestCharacterStuffing {
 
     /**
      * Tests bit stuffing and unstuffing explicitly for null and empty input.
+     * Should always return empty string after stuffing and unstuffing.
      */
     @Test
     public void testBitStuffingEmptyInput() {
