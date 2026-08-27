@@ -4,6 +4,8 @@ import java.util.*;
  * Demonstrates three framing methods: Character Count, Character Stuffing,
  * and Bit Stuffing, with corresponding unframing/unstuffing routines.
  * Includes input validation and improved comments for maintainability.
+ *
+ * Utility class: prevents instantiation.
  */
 public class FramingDemo {
     /**
@@ -38,6 +40,8 @@ public class FramingDemo {
     }
     /**
      * Character Stuffing: Escapes 'DLE' in data and adds framing start/end markers.
+     * @param frames Array of data frames
+     * @return Array of character-stuffed frames
      */
     static String[] characterStuffing(String[] frames) {
         System.out.println("\nCharacter Stuffing Framing:");
@@ -52,6 +56,7 @@ public class FramingDemo {
     }
     /**
      * Unframes Character Stuffed data.
+     * @param stuffedFrames Array of character-stuffed frames
      */
     static void characterUnstuffing(String[] stuffedFrames) {
         System.out.println("\nCharacter Stuffing Unframing:");
@@ -64,6 +69,8 @@ public class FramingDemo {
     }
     /**
      * Bit Stuffing: Inserts '0' after five consecutive '1's in the bit stream.
+     * @param frames Array of data frames
+     * @return Array of bit-stuffed (framed) strings
      */
     static String[] bitStuffing(String[] frames) {
         System.out.println("\nBit Stuffing Framing:");
@@ -92,6 +99,7 @@ public class FramingDemo {
     }
     /**
      * Removes bit stuffing and framing flags, recovers original text.
+     * @param stuffedFrames Array of bit-stuffed frames
      */
     static void bitUnstuffing(String[] stuffedFrames) {
         System.out.println("\nBit Unstuffing:");
@@ -127,7 +135,14 @@ public class FramingDemo {
             System.out.println("Recovered Text: " + recovered);
         }
     }
+    /**
+     * Private constructor to prevent instantiation of utility class.
+     */
     private FramingDemo() {}
+
+    /**
+     * Main method to demonstrate all three framing methods with user input.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of frames: ");
