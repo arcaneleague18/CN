@@ -9,9 +9,9 @@ public class FramingDemo {
     /**
      * Character Count Framing: Prefixes each frame with its length.
      * @param frames Array of data frames
-     * @return Array of framed data
+     * @return Array of framed data with length prefix
      */
-    static String[] characterCount(String[] frames) {
+    public static String[] characterCount(String[] frames) {
         System.out.println("\nCharacter Count Framing:");
         String[] framed = new String[frames.length];
         for (int i = 0; i < frames.length; i++) {
@@ -22,9 +22,10 @@ public class FramingDemo {
     }
     /**
      * Unframes data using Character Count method.
+     * Prints the extracted data frames to the console.
      * @param framedData Array of framed data
      */
-    static void characterCountUnstuff(String[] framedData) {
+    public static void characterCountUnstuff(String[] framedData) {
         System.out.println("\nCharacter Count Unframing:");
         for (String data : framedData) {
             int len = Character.getNumericValue(data.charAt(0)) - 1;
@@ -38,8 +39,10 @@ public class FramingDemo {
     }
     /**
      * Character Stuffing: Escapes 'DLE' in data and adds framing start/end markers.
+     * @param frames Array of data frames
+     * @return Array of stuffed and framed data
      */
-    static String[] characterStuffing(String[] frames) {
+    public static String[] characterStuffing(String[] frames) {
         System.out.println("\nCharacter Stuffing Framing:");
         String[] framed = new String[frames.length];
         String start = "DLESTX", end = "DLEETX";
@@ -52,8 +55,10 @@ public class FramingDemo {
     }
     /**
      * Unframes Character Stuffed data.
+     * Prints the extracted data frames to the console.
+     * @param stuffedFrames Array of stuffed and framed data
      */
-    static void characterUnstuffing(String[] stuffedFrames) {
+    public static void characterUnstuffing(String[] stuffedFrames) {
         System.out.println("\nCharacter Stuffing Unframing:");
         for (String frame : stuffedFrames) {
             String data = frame.replace("DLESTX", "")
@@ -64,8 +69,12 @@ public class FramingDemo {
     }
     /**
      * Bit Stuffing: Inserts '0' after five consecutive '1's in the bit stream.
+     * Each character is converted to its 8-bit binary representation.
+     * Framing flags (HDLC 01111110) are added at both ends.
+     * @param frames Array of data frames (text strings)
+     * @return Array of bit-stuffed and framed binary strings
      */
-    static String[] bitStuffing(String[] frames) {
+    public static String[] bitStuffing(String[] frames) {
         System.out.println("\nBit Stuffing Framing:");
         String flag = "01111110";
         String[] framed = new String[frames.length];
@@ -92,8 +101,10 @@ public class FramingDemo {
     }
     /**
      * Removes bit stuffing and framing flags, recovers original text.
+     * Prints the recovered data to the console.
+     * @param stuffedFrames Array of bit-stuffed and framed binary strings
      */
-    static void bitUnstuffing(String[] stuffedFrames) {
+    public static void bitUnstuffing(String[] stuffedFrames) {
         System.out.println("\nBit Unstuffing:");
         String flag = "01111110";
         for (String frame : stuffedFrames) {
@@ -127,7 +138,15 @@ public class FramingDemo {
             System.out.println("Recovered Text: " + recovered);
         }
     }
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private FramingDemo() {}
+    /**
+     * Main method for demonstration and manual testing.
+     * Accepts a number of frames, applies framing/unframing routines, and shows results.
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of frames: ");
