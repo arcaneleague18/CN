@@ -4,13 +4,16 @@ import java.util.*;
  * Computes and demonstrates CRC (Cyclic Redundancy Check) codes using
  * standard generator polynomials. Supports CRC-12, CRC-16, and CRC-CCITT.
  * Provides input validation and improved comments for clarity.
+ *
+ * Utility class; all methods are static and class is non-instantiable.
  */
 public class CRCComputation {
     /**
      * Performs XOR between two binary strings (excluding leading bit).
-     * @param a First binary string (divisor or zero string)
+     *
+     * @param a First binary string (divisor or zero string, must match length of b)
      * @param b Second binary string (current remainder)
-     * @return XOR result as a binary string (length b.length() - 1)
+     * @return XOR result as a binary string (length b.length() - 1), skipping leading bit
      */
     static String xor(String a, String b) {
         StringBuilder result = new StringBuilder();
@@ -21,9 +24,10 @@ public class CRCComputation {
     }
     /**
      * Divides the dividend by the divisor using binary polynomial division for CRC.
+     *
      * @param dividend Input data with appended zeros (binary string)
      * @param divisor Generator polynomial (binary string)
-     * @return Remainder as a binary string
+     * @return Remainder as a binary string (CRC bits)
      */
     static String divide(String dividend, String divisor) {
         int pick = divisor.length();
@@ -45,6 +49,7 @@ public class CRCComputation {
     }
     /**
      * Computes the CRC remainder for the given data and generator polynomial.
+     *
      * @param data Data bits (binary string)
      * @param generator Generator polynomial (binary string)
      * @return Remainder as a binary string (CRC bits)
@@ -59,6 +64,14 @@ public class CRCComputation {
      * Private constructor to prevent instantiation of utility class.
      */
     private CRCComputation() {}
+
+    /**
+     * Main method for demonstration and manual testing.
+     * Reads binary data input and computes CRC codes using standard generator polynomials.
+     * Prints CRC remainders and codewords for CRC-12, CRC-16, CRC-CCITT.
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter data bits (binary): ");
