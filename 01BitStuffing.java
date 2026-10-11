@@ -11,6 +11,10 @@ public class BitStuffingString {
 
     /**
      * Performs bit stuffing on a binary string (inserts '0' after five consecutive '1's).
+     * <p>
+     * If the input is null or empty, returns an empty string.
+     * Only valid for binary strings consisting of '0' and '1'.
+     *
      * @param data Bit string (only '0' and '1')
      * @return Bit-stuffed string (may be empty if data is null or empty)
      */
@@ -36,6 +40,10 @@ public class BitStuffingString {
 
     /**
      * Performs bit unstuffing on a bit-stuffed string (removes '0' after five consecutive '1's).
+     * <p>
+     * If the input is null or empty, returns an empty string.
+     * Only valid for binary strings consisting of '0' and '1'.
+     *
      * @param stuffed Bit-stuffed string (only '0' and '1')
      * @return Original unstuffed bit string (may be empty if stuffed is null or empty)
      */
@@ -70,6 +78,7 @@ public class BitStuffingString {
     /**
      * Main method for demonstration and manual testing.
      * Accepts a bit stream, validates it, applies bit stuffing, framing flags, and unstuffing.
+     *
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
