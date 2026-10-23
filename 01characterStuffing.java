@@ -41,6 +41,8 @@ public class CharacterStuffing {
      */
     public static String unstuff(String stuffed, char FLAG, char ESC) {
         if (stuffed == null || stuffed.length() < 2) return "";
+        // Defensive: ensure both ends are FLAG
+        if (stuffed.charAt(0) != FLAG || stuffed.charAt(stuffed.length() - 1) != FLAG) return "";
         String innerData = stuffed.substring(1, stuffed.length() - 1);
         StringBuilder unstuffed = new StringBuilder();
         boolean escapeNext = false;

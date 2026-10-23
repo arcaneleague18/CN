@@ -15,6 +15,7 @@ public class FramingDemo {
         System.out.println("\nCharacter Count Framing:");
         String[] framed = new String[frames.length];
         for (int i = 0; i < frames.length; i++) {
+            if (frames[i] == null) frames[i] = "";
             framed[i] = (frames[i].length() + 1) + frames[i];
             System.out.println(framed[i]);
         }
@@ -28,6 +29,10 @@ public class FramingDemo {
     public static void characterCountUnstuff(String[] framedData) {
         System.out.println("\nCharacter Count Unframing:");
         for (String data : framedData) {
+            if (data == null || data.isEmpty() || !Character.isDigit(data.charAt(0))) {
+                System.out.println("Invalid frame: " + data);
+                continue;
+            }
             int len = Character.getNumericValue(data.charAt(0)) - 1;
             if (len < 0 || len > data.length() - 1) {
                 System.out.println("Invalid frame: " + data);
@@ -47,7 +52,8 @@ public class FramingDemo {
         String[] framed = new String[frames.length];
         String start = "DLESTX", end = "DLEETX";
         for (int i = 0; i < frames.length; i++) {
-            String stuffed = frames[i].replace("DLE", "DLEDLE");
+            String frame = frames[i] == null ? "" : frames[i];
+            String stuffed = frame.replace("DLE", "DLEDLE");
             framed[i] = start + stuffed + end;
             System.out.println(framed[i]);
         }
@@ -61,6 +67,10 @@ public class FramingDemo {
     public static void characterUnstuffing(String[] stuffedFrames) {
         System.out.println("\nCharacter Stuffing Unframing:");
         for (String frame : stuffedFrames) {
+            if (frame == null) {
+                System.out.println("");
+                continue;
+            }
             String data = frame.replace("DLESTX", "")
                                .replace("DLEETX", "")
                                .replace("DLEDLE", "DLE");
@@ -80,7 +90,8 @@ public class FramingDemo {
         String[] framed = new String[frames.length];
         for (int i = 0; i < frames.length; i++) {
             StringBuilder bits = new StringBuilder();
-            for (char c : frames[i].toCharArray())
+            String frame = frames[i] == null ? "" : frames[i];
+            for (char c : frame.toCharArray())
                 bits.append(String.format("%8s", Integer.toBinaryString(c)).replace(' ', '0'));
             StringBuilder stuffed = new StringBuilder();
             int count = 0;
@@ -108,6 +119,10 @@ public class FramingDemo {
         System.out.println("\nBit Unstuffing:");
         String flag = "01111110";
         for (String frame : stuffedFrames) {
+            if (frame == null) {
+                System.out.println("Recovered Text: ");
+                continue;
+            }
             // Remove flags
             String bits = frame.replace(flag, "");
             // Remove stuffed 0s
