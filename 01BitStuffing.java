@@ -77,7 +77,7 @@ public class BitStuffingString {
         final String FLAG = "01111110";
         System.out.print("Enter bit stream (only 0s and 1s): ");
         String data = sc.nextLine();
-        if (!data.matches("[01]+")) {
+        if (data == null || !data.matches("[01]+")) {
             System.out.println("Invalid input. Enter only 0s and 1s.");
             sc.close();
             return;
